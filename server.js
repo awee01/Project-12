@@ -4,6 +4,8 @@ const db = require('./db/connection');
 const table = require("console.table");
 
 
+
+
 QuestionPrompt();
 
 
@@ -74,7 +76,7 @@ function viewDepartment() {
 
     var result = db.query(
         sqlQuery,
-        function(err, results, fields) {
+        function(err, result, fields) {
             if (err) {
                 console.log("Bad Error: ", err)
             }
