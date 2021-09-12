@@ -27,12 +27,14 @@
   
   ## Instructions:
   
-  Navigate to the folder in your console and activate npm start command.
+  Navigate to the folder in your console and activate **npm start command**.
   
   Make sure you have installed the following addons: 
   
-  npm install inquirer
+  **npm install inquirer**
   
-  npm install mysql2
+  **npm install mysql2**
   
-  npm install console.table
+  **npm install console.table**
+  
+  The program will ask for user input in selecting options and entering in new data.
