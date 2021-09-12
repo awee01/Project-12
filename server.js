@@ -3,14 +3,9 @@ const inquirer = require("inquirer");
 const db = require('./db/connection');
 const table = require("console.table");
 
-// Message when first connecting to server.js
-connection.connect(function (err) {
-    if (err) throw err;
-    console.log(`Welcome to the Employee Database`)
 
-    //Runs the first initial prompt
-    QuestionPrompt();
-});
+QuestionPrompt();
+
 
 //Initial prompt, app will continously cycle back to this prompt after user has finished input.
 function QuestionPrompt() {
