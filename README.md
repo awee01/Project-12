@@ -26,5 +26,7 @@
   * THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
   
   ## Instructions:
+  
+This application accepts user input and reforms data in pre-existing tables
 
 Video Demonstration:
