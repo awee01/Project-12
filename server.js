@@ -4,8 +4,6 @@ const db = require('./db/connection');
 const table = require("console.table");
 
 
-
-
 QuestionPrompt();
 
 
@@ -84,13 +82,22 @@ function viewDepartment() {
             console.log(fields); // fields contains extra meta data about results, if available
             console.table(result)
         })
+
+        QuestionPrompt();
+
 }
 
 function viewRole() {
 
+    QuestionPrompt();
+
+
 }
 
 function viewEmployee() {
+
+    QuestionPrompt();
+
 
 }
 
@@ -108,17 +115,29 @@ function addDepartment(departmentName) {
             }
             console.log(results); // results contains rows returned by server
         })
+
+        QuestionPrompt();
+
 }
 
 
 function addRole(title, salary, department_id) {
 
+    QuestionPrompt();
+
+
 }
 
 function addEmployee() {
 
+    QuestionPrompt();
+
+
 }
 
 function updateEmployee() {
+
+    QuestionPrompt();
+
 
 }
