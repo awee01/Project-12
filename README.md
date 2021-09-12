@@ -26,15 +26,5 @@
   * THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
   
   ## Instructions:
-  
-  Navigate to the folder in your console and activate **npm start command**.
-  
-  Make sure you have installed the following addons: 
-  
-  **npm install inquirer**
-  
-  **npm install mysql2**
-  
-  **npm install console.table**
-  
-  The program will ask for user input in selecting options and entering in new data.
+
+Video Demonstration:
