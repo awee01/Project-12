@@ -32,5 +32,7 @@
   Make sure you have installed the following addons: 
   
   npm install inquirer
+  
   npm install mysql2
+  
   npm install console.table
