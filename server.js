@@ -70,8 +70,23 @@ function QuestionPrompt() {
 }
 
 function viewDepartment() {
+    const sqlQuery = "SELECT * from department"
+    // Expected result
+    // (1, 'Sales'),
+    //     (2, 'Engineering'),
+    //     (3, 'Finance'),
+    //     (4, 'Legal');
 
-
+    var result = db.query(
+        sqlQuery,
+        function(err, results, fields) {
+            if (err) {
+                console.log("Bad Error: ", err)
+            }
+            console.log(results); // results contains rows returned by server
+            console.log(fields); // fields contains extra meta data about results, if available
+            console.table(result)
+        })
 }
 
 function viewRole() {
@@ -82,12 +97,24 @@ function viewEmployee() {
 
 }
 
-function addDepartment() {
+function addDepartment(departmentName) {
+    const sqlQuery = "INSERT INTO department (department_name) VALUES ?"
+    const sqlParams = `('${departmentName}')`
+    // Example: sqlParams = "('Finance')"
 
+    var result = db.query(
+        sqlQuery,
+        [sqlParams],
+        function(err, results) {
+            if (err) {
+                console.log("Bad Error: ", err)
+            }
+            console.log(results); // results contains rows returned by server
+        })
 }
 
 
-function addRole() {
+function addRole(title, salary, department_id) {
 
 }
 
