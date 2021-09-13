@@ -65,79 +65,148 @@ function QuestionPrompt() {
 }
 
 function viewDepartment() {
-    const sqlQuery = "SELECT * from department"
-    // Expected result
-    // (1, 'Sales'),
-    //     (2, 'Engineering'),
-    //     (3, 'Finance'),
-    //     (4, 'Legal');
 
-    var result = db.query(
-        sqlQuery,
-        function(err, result, fields) {
-            if (err) {
-                console.log("Bad Error: ", err)
-            }
-            console.log(results); // results contains rows returned by server
-            console.log(fields); // fields contains extra meta data about results, if available
-            console.table(result)
-        })
+    db.query("SELECT * from department")
 
-        QuestionPrompt();
+    QuestionPrompt();
 
 }
 
 function viewRole() {
 
-    QuestionPrompt();
+   db.query("SELECT * from employeeRole")
 
+    QuestionPrompt();
 
 }
 
 function viewEmployee() {
 
-    QuestionPrompt();
 
-
-}
-
-function addDepartment(departmentName) {
-    const sqlQuery = "INSERT INTO department (department_name) VALUES ?"
-    const sqlParams = `('${departmentName}')`
-    // Example: sqlParams = "('Finance')"
-
-    var result = db.query(
-        sqlQuery,
-        [sqlParams],
-        function(err, results) {
-            if (err) {
-                console.log("Bad Error: ", err)
-            }
-            console.log(results); // results contains rows returned by server
-        })
-
-        QuestionPrompt();
-
-}
-
-
-function addRole(title, salary, department_id) {
+    db.query("SELECT * from employee")
 
     QuestionPrompt();
 
+}
+
+function addDepartment(department_name) {
+
+    inquirer.prompt([
+
+        {
+        type: 'input',
+        name: 'newdepartment',
+        message: 'Enter the new Department',
+        }
+
+    ]).then((addnewdepartment) => {
+
+        db.query("INSERT INTO department (department_name) VALUES (?)", 
+        [addnewdepartment.deptName])
+     
+    })
+
+    QuestionPrompt();
+}
+
+
+function addRole(title, salary, departmentid) {
+
+    inquirer.prompt([
+
+        {
+        type: 'input',
+        name: 'newjobtitle',
+        message: 'Enter the new job',
+        },
+
+        {
+        type: 'input',
+        name: 'newsalary',
+        message: 'Input a salary',
+        },
+
+        {
+        type: 'input',
+        name: 'newdepartmentid',
+        message: 'Input a department ID',
+        },
+
+    ]).then((addnewRole) => {
+
+        db.query("INSERT INTO employeeRole (title, salary, department_id) VALUES (?, ?, ?)", 
+        [addnewRole.newjobtitle, addnewRole.newsalary, addnewRole.newdepartmentid ])
+     
+    })
+
+QuestionPrompt();
 
 }
+
 
 function addEmployee() {
 
-    QuestionPrompt();
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'newfirstname',
+            message: 'Enter your first name',
+            
+        },
+        {
+            type: 'input',
+            name: 'newlastname',
+            message: 'Enter your last name',
+            
+        },
+        {
+            type: 'input',
+            name: 'newroleid',
+            message: 'Enter your role id number',
+           
+        },
+        {
+            type: 'input',
+            name: 'newmanagerid',
+            message: 'Enter your manager id number',
+           
+        }
+    ]).then((addnewEmployee) => {
 
+        db.query("INSERT INTO employee (first_name, last_name, employeeRole_id, manager_id) VALUES (?, ?, ?, ?)", 
+        [addnewEmployee.newfirstname, addnewEmployee.newlastname, addnewEmployee.newroleid, addnewEmployee.newmanagerid])
+     
+    })
+
+QuestionPrompt();
 
 }
 
+
+
 function updateEmployee() {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "Enter the name of the employee that needs an update",
+          name: "employeeupdate"
+        },
+  
+        {
+          type: "input",
+          message: "What is the new role ID of the employee?",
+          name: "roleupdate"
+        }
+      ]).then((updateEmployee) => {
 
-    QuestionPrompt();
+        db.query("UPDATE employee SET employeeRole_id = ? WHERE id = ?",
+        [updateEmployee.roleupdate, updateEmployee.employeeupdate])
+    })
 
+
+
+
+  QuestionPrompt();
 
 }
