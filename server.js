@@ -86,7 +86,7 @@ function viewRole() {
     db.query("SELECT * from employeeRole",
 
     // FROM roles
-    // LEFT JOIN department ON roles.department_id = department.id
+    // LEFT JOIN department ON roles.department_id = department.id",
 
 
         function (err, res) {
@@ -107,7 +107,7 @@ function viewEmployee() {
     // FROM employee
     // LEFT JOIN role ON employee.employeeRole_id = role.id
     // LEFT JOIN department ON employeeRole.department_id = department.id
-    // LEFT JOIN employee manager ON employee.manager_id = manager.id`;
+    // LEFT JOIN employee manager ON employee.manager_id = manager.id";
 
         function (err, res) {
             if (err) throw err;
