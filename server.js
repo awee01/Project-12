@@ -25,6 +25,8 @@ function QuestionPrompt() {
 
         })
 
+//linking to seperate functions for options
+
         .then(function ({
             option
         }) {
@@ -64,149 +66,181 @@ function QuestionPrompt() {
         });
 }
 
+//view all departments
 function viewDepartment() {
 
-    db.query("SELECT * from department")
+    db.query("SELECT * from department"),
 
-    QuestionPrompt();
+        function (err, res) {
+            if (err) throw err;
+            console.table(res)
 
+            QuestionPrompt();
+
+        }
 }
 
+//view all roles
 function viewRole() {
 
-   db.query("SELECT * from employeeRole")
+    db.query("SELECT * from employeeRole"),
 
-    QuestionPrompt();
+        function (err, res) {
+            if (err) throw err;
+            console.table(res)
 
+            QuestionPrompt();
+
+        }
 }
 
+//view all employees
 function viewEmployee() {
 
 
-    db.query("SELECT * from employee")
+    db.query("SELECT * from employee"),
 
-    QuestionPrompt();
+        function (err, res) {
+            if (err) throw err;
+            console.table(res)
 
+            QuestionPrompt();
+
+        }
 }
 
-function addDepartment(department_name) {
+//add a department
+function addDepartment() {
 
     inquirer.prompt([
 
         {
-        type: 'input',
-        name: 'newdepartment',
-        message: 'Enter the new Department',
+            type: 'input',
+            name: 'newdepartment',
+            message: 'Enter the new Department',
         }
 
     ]).then((addnewdepartment) => {
 
-        db.query("INSERT INTO department (department_name) VALUES (?)", 
-        [addnewdepartment.deptName])
-     
-    })
+        db.query("INSERT INTO department (department_name) VALUES (?)",
+            [addnewdepartment.newdepartment],
 
-    QuestionPrompt();
+            function (err, res) {
+                if (err) throw err;
+                console.table(res)
+
+                QuestionPrompt();
+
+            })
+    })
 }
 
-
-function addRole(title, salary, departmentid) {
+//add a role
+function addRole() {
 
     inquirer.prompt([
 
         {
-        type: 'input',
-        name: 'newjobtitle',
-        message: 'Enter the new job',
+            type: 'input',
+            name: 'newjobtitle',
+            message: 'Enter the new job',
         },
 
         {
-        type: 'input',
-        name: 'newsalary',
-        message: 'Input a salary',
+            type: 'input',
+            name: 'newsalary',
+            message: 'Input a salary',
         },
 
         {
-        type: 'input',
-        name: 'newdepartmentid',
-        message: 'Input a department ID',
+            type: 'input',
+            name: 'newdepartmentid',
+            message: 'Input a department ID',
         },
 
     ]).then((addnewRole) => {
 
-        db.query("INSERT INTO employeeRole (title, salary, department_id) VALUES (?, ?, ?)", 
-        [addnewRole.newjobtitle, addnewRole.newsalary, addnewRole.newdepartmentid ])
-     
+        db.query("INSERT INTO employeeRole (title, salary, department_id) VALUES (?, ?, ?)",
+            [addnewRole.newjobtitle, addnewRole.newsalary, addnewRole.newdepartmentid],
+
+            function (err, res) {
+                if (err) throw err;
+                console.table(res)
+
+                QuestionPrompt();
+
+            })
     })
-
-QuestionPrompt();
-
 }
 
-
+//add an employee
 function addEmployee() {
 
-    inquirer.prompt([
-        {
+    inquirer.prompt([{
             type: 'input',
             name: 'newfirstname',
             message: 'Enter your first name',
-            
+
         },
         {
             type: 'input',
             name: 'newlastname',
             message: 'Enter your last name',
-            
+
         },
         {
             type: 'input',
             name: 'newroleid',
             message: 'Enter your role id number',
-           
+
         },
         {
             type: 'input',
             name: 'newmanagerid',
             message: 'Enter your manager id number',
-           
+
         }
     ]).then((addnewEmployee) => {
 
-        db.query("INSERT INTO employee (first_name, last_name, employeeRole_id, manager_id) VALUES (?, ?, ?, ?)", 
-        [addnewEmployee.newfirstname, addnewEmployee.newlastname, addnewEmployee.newroleid, addnewEmployee.newmanagerid])
-     
+        db.query("INSERT INTO employee (first_name, last_name, employeeRole_id, manager_id) VALUES (?, ?, ?, ?)",
+            [addnewEmployee.newfirstname, addnewEmployee.newlastname, addnewEmployee.newroleid, addnewEmployee.newmanagerid],
+
+            function (err, res) {
+                if (err) throw err;
+                console.table(res)
+
+                QuestionPrompt();
+
+            })
     })
-
-QuestionPrompt();
-
 }
 
 
-
+//update an existing employee
 function updateEmployee() {
     inquirer
-      .prompt([
-        {
-          type: "input",
-          message: "Enter the name of the employee that needs an update",
-          name: "employeeupdate"
-        },
-  
-        {
-          type: "input",
-          message: "What is the new role ID of the employee?",
-          name: "roleupdate"
-        }
-      ]).then((updateEmployee) => {
+        .prompt([{
+                type: "input",
+                message: "Enter the name of the employee that needs an update",
+                name: "employeeupdate"
+            },
 
-        db.query("UPDATE employee SET employeeRole_id = ? WHERE id = ?",
-        [updateEmployee.roleupdate, updateEmployee.employeeupdate])
-    })
+            {
+                type: "input",
+                message: "What is the new role ID of the employee?",
+                name: "roleupdate"
+            }
+        ]).then((updateEmployee) => {
 
+            db.query("UPDATE employee SET employeeRole_id = ? WHERE id = ?",
+                [updateEmployee.roleupdate, updateEmployee.employeeupdate],
 
+                function (err, res) {
+                    if (err) throw err;
+                    console.table(res)
 
+                    QuestionPrompt();
 
-  QuestionPrompt();
-
+                })
+        })
 }

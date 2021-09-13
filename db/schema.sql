@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS employee;
 
 CREATE TABLE department (
   id INTEGER AUTO_INCREMENT PRIMARY KEY,
-  dep_name VARCHAR(30) NOT NULL
+  department_name VARCHAR(30) NOT NULL
 
 );
 
@@ -14,16 +14,17 @@ CREATE TABLE employeeRole (
   salary DECIMAL(10,2) NOT NULL,
   department_id INTEGER NOT NULL,
 
-  CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id) 
+  CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE
 );
 
 CREATE TABLE employee (
   id INTEGER AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
-  employeeRole_id INTEGER NOT NULL,
-  manager_id INTEGER,
 
-  CONSTRAINT fk_employeeRole FOREIGN KEY (employeeRole_id) REFERENCES employeeRole(id),
-  CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id)
+  employeeRole_id INTEGER NOT NULL,
+  CONSTRAINT fk_employeeRole FOREIGN KEY (employeeRole_id) REFERENCES employeeRole(id) ON DELETE CASCADE,
+  
+  manager_id INTEGER
+ 
 );
