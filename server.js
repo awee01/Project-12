@@ -249,7 +249,7 @@ function updateEmployee() {
 }
 
 // // function to delete employees
-// deleteEmployee = () => {
+function deleteEmployee() {
 //     // get employees from employee table 
 //     const employeeSql = `SELECT * FROM employee`;
   
