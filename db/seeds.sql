@@ -23,8 +23,8 @@ VALUES
     ('Mike', 'Chan', 2, 1),
     ('Ashley', 'Rodriguez', 3, null),
     ('Kevin', 'Tupik', 4, 3),
-    ('Malia', 'Brown', 5, null),
-    ('Sarah', 'Lourd', 6, null),
+    ('Malia', 'Brown', 5, 3),
+    ('Sarah', 'Lourd', 6, 3),
     ('Tom', 'Allen', 7, 3),
     ('Tanmer', 'Galal', 4, 3);
 

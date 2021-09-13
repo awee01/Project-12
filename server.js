@@ -12,6 +12,7 @@ function QuestionPrompt() {
     inquirer.prompt({
             message: "Select an Option",
             type: "list",
+            name: "option",
             choices: [
                 "View all departments",
                 "View all roles",
@@ -59,9 +60,6 @@ function QuestionPrompt() {
                     updateEmployee();
                     break;
 
-                case "Quit":
-                    connection.end();
-                    break;
             }
         });
 }
@@ -69,7 +67,7 @@ function QuestionPrompt() {
 //view all departments
 function viewDepartment() {
 
-    db.query("SELECT * from department"),
+    db.query("SELECT * from department",
 
         function (err, res) {
             if (err) throw err;
@@ -77,13 +75,13 @@ function viewDepartment() {
 
             QuestionPrompt();
 
-        }
+        })
 }
 
 //view all roles
 function viewRole() {
 
-    db.query("SELECT * from employeeRole"),
+    db.query("SELECT * from employeeRole",
 
         function (err, res) {
             if (err) throw err;
@@ -91,14 +89,14 @@ function viewRole() {
 
             QuestionPrompt();
 
-        }
+        })
 }
 
 //view all employees
 function viewEmployee() {
 
 
-    db.query("SELECT * from employee"),
+    db.query("SELECT * from employee",
 
         function (err, res) {
             if (err) throw err;
@@ -106,7 +104,7 @@ function viewEmployee() {
 
             QuestionPrompt();
 
-        }
+        })
 }
 
 //add a department
@@ -125,12 +123,9 @@ function addDepartment() {
         db.query("INSERT INTO department (department_name) VALUES (?)",
             [addnewdepartment.newdepartment],
 
-            function (err, res) {
+            function (err) {
                 if (err) throw err;
-                console.table(res)
-
                 QuestionPrompt();
-
             })
     })
 }
@@ -163,13 +158,11 @@ function addRole() {
         db.query("INSERT INTO employeeRole (title, salary, department_id) VALUES (?, ?, ?)",
             [addnewRole.newjobtitle, addnewRole.newsalary, addnewRole.newdepartmentid],
 
-            function (err, res) {
+            function (err) {
                 if (err) throw err;
-                console.table(res)
-
                 QuestionPrompt();
-
-            })
+    
+             })
     })
 }
 
@@ -205,13 +198,12 @@ function addEmployee() {
         db.query("INSERT INTO employee (first_name, last_name, employeeRole_id, manager_id) VALUES (?, ?, ?, ?)",
             [addnewEmployee.newfirstname, addnewEmployee.newlastname, addnewEmployee.newroleid, addnewEmployee.newmanagerid],
 
-            function (err, res) {
+            function (err) {
                 if (err) throw err;
-                console.table(res)
-
                 QuestionPrompt();
-
+    
             })
+
     })
 }
 
@@ -221,7 +213,7 @@ function updateEmployee() {
     inquirer
         .prompt([{
                 type: "input",
-                message: "Enter the name of the employee that needs an update",
+                message: "Enter the employee ID you would like to update",
                 name: "employeeupdate"
             },
 
@@ -235,12 +227,10 @@ function updateEmployee() {
             db.query("UPDATE employee SET employeeRole_id = ? WHERE id = ?",
                 [updateEmployee.roleupdate, updateEmployee.employeeupdate],
 
-                function (err, res) {
+                function (err) {
                     if (err) throw err;
-                    console.table(res)
-
                     QuestionPrompt();
-
+        
                 })
         })
 }
