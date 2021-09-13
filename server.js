@@ -1,3 +1,4 @@
+  
 const mysql = require('mysql2');
 const inquirer = require("inquirer");
 const db = require('./db/connection');
@@ -13,7 +14,8 @@ function QuestionPrompt() {
             message: "Select an Option",
             type: "list",
             name: "option",
-            choices: [
+            choices: 
+            [
                 "View all departments",
                 "View all roles",
                 "View all employees",
@@ -28,9 +30,8 @@ function QuestionPrompt() {
 
 //linking to seperate functions for options
 
-        .then(function ({
-            option
-        }) {
+        .then(function ({option}) 
+        {
             switch (option) {
                 case "View all departments":
                     viewDepartment();
@@ -69,6 +70,8 @@ function viewDepartment() {
 
     db.query("SELECT * from department",
 
+ 
+
         function (err, res) {
             if (err) throw err;
             console.table(res)
@@ -80,8 +83,13 @@ function viewDepartment() {
 
 //view all roles
 function viewRole() {
+    
 
     db.query("SELECT * from employeeRole",
+
+    // FROM roles
+    // LEFT JOIN department ON roles.department_id = department.id
+
 
         function (err, res) {
             if (err) throw err;
@@ -97,6 +105,8 @@ function viewEmployee() {
 
 
     db.query("SELECT * from employee",
+    
+    // INNER JOIN department on department.id = roles.department_id
 
         function (err, res) {
             if (err) throw err;
