@@ -250,6 +250,6 @@ function updateEmployee() {
 
  // function to delete employees
 // function deleteEmployee() {
-//     // get employees from employee table 
+//  
 //     const employeeSql = `SELECT * FROM employee`;
   
