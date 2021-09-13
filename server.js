@@ -15,7 +15,7 @@ function QuestionPrompt() {
             type: "list",
             name: "option",
             choices: 
-            [
+              [
                 "View all departments",
                 "View all roles",
                 "View all employees",
@@ -23,9 +23,7 @@ function QuestionPrompt() {
                 "Add a role",
                 "Add an employee",
                 "Update an employee role",
-               
-            ]
-
+              ]
         })
 
 //linking to seperate functions for options
