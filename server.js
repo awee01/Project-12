@@ -105,8 +105,11 @@ function viewEmployee() {
 
 
     db.query("SELECT * from employee",
-    
-    // INNER JOIN department on department.id = roles.department_id
+
+    // FROM employee
+    // LEFT JOIN role ON employee.role_id = role.id
+    // LEFT JOIN department ON role.department_id = department.id
+    // LEFT JOIN employee manager ON employee.manager_id = manager.id`;
 
         function (err, res) {
             if (err) throw err;
@@ -244,3 +247,9 @@ function updateEmployee() {
                 })
         })
 }
+
+// // function to delete employees
+// deleteEmployee = () => {
+//     // get employees from employee table 
+//     const employeeSql = `SELECT * FROM employee`;
+  
