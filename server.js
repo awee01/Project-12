@@ -248,8 +248,8 @@ function updateEmployee() {
         })
 }
 
- // function to delete employees
-// function deleteEmployee() {
-//  
-//     const employeeSql = `SELECT * FROM employee`;
+ //function to delete employees
+ //function deleteEmployee() {
+ //  
+ //db.query("SELECT * FROM employee")
   
